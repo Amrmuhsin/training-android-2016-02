@@ -12,4 +12,10 @@
     tools:context="com.artivisi.app.android.pembayaran.SebelumLoginActivity"
     tools:showIn="@layout/app_bar_sebelum_login">
 
+
+    <FrameLayout
+        android:id="@+id/fragment_sebelum_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
 </RelativeLayout>
