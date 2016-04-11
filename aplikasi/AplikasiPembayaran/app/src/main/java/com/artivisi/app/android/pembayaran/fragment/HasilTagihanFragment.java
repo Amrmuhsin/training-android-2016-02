@@ -11,26 +11,25 @@ import android.widget.Button;
 
 import com.artivisi.app.android.pembayaran.R;
 
-
 /**
  * Created by endymuhardin on 4/11/16.
  */
-public class CekTagihanFragment extends Fragment {
+public class HasilTagihanFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fr_cek_tagihan, container, false);
+        View fragmentView = inflater.inflate(R.layout.fr_hasil_tagihan, container, false);
 
-        Button btTagihan = (Button) fragmentView.findViewById(R.id.btnTagihan);
-        btTagihan.setOnClickListener(new View.OnClickListener() {
+        Button btnBack = (Button) fragmentView.findViewById(R.id.btnBackHasilTagihan);
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft =
-                        CekTagihanFragment.this.getActivity()
+                        HasilTagihanFragment.this.getActivity()
                                 .getSupportFragmentManager()
-                        .beginTransaction();
+                                .beginTransaction();
 
-                ft.replace(R.id.fragment_sebelum_login, new HasilTagihanFragment());
+                ft.replace(R.id.fragment_sebelum_login, new CekTagihanFragment());
                 ft.commit();
             }
         });
