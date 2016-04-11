@@ -3,6 +3,7 @@ package com.artivisi.app.android.pembayaran.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.artivisi.app.android.pembayaran.R;
+import com.artivisi.app.android.pembayaran.activity.SebelumLoginActivity;
 
 /**
  * Created by endymuhardin on 4/11/16.
@@ -24,12 +26,12 @@ public class HasilTagihanFragment extends Fragment {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction ft =
-                        HasilTagihanFragment.this.getActivity()
-                                .getSupportFragmentManager()
-                                .beginTransaction();
+                FragmentManager fm = HasilTagihanFragment.this.getActivity()
+                        .getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
 
                 ft.replace(R.id.fragment_sebelum_login, new CekTagihanFragment());
+                fm.popBackStackImmediate();
                 ft.commit();
             }
         });
