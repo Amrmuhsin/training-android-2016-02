@@ -22,6 +22,11 @@ public class HasilTagihanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fr_hasil_tagihan, container, false);
 
+        if(getActivity().getClass().isAssignableFrom(SebelumLoginActivity.class)){
+            Button btnBayar = (Button) fragmentView.findViewById(R.id.btnBayar);
+            btnBayar.setText("Registrasi");
+        }
+
         Button btnBack = (Button) fragmentView.findViewById(R.id.btnBackHasilTagihan);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
