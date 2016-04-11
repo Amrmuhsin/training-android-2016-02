@@ -31,6 +31,7 @@ public class CekTagihanFragment extends Fragment {
                         .beginTransaction();
 
                 ft.replace(R.id.fragment_sebelum_login, new HasilTagihanFragment());
+                ft.addToBackStack(null);
                 ft.commit();
             }
         });
