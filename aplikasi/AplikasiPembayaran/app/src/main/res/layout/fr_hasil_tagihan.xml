@@ -1,12 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Hasil Tagihan"
-        android:id="@+id/textView5" />
-</LinearLayout>
+        android:text="Tagihan Anda"
+        android:id="@+id/tvTagihanAnda"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rp. 100.000,00"
+        android:id="@+id/tvTotal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvTagihanAnda"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nama Pelanggan"
+        android:id="@+id/tvNamaPelanggan"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvTotal"
+        android:paddingBottom="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123456789012"
+        android:textAlignment="textEnd"
+        android:id="@+id/tvNoPelanggan"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_below="@id/tvNamaPelanggan"
+        android:width="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Pelanggan"
+        android:id="@+id/tvLabelNoPelanggan"
+        android:layout_below="@id/tvNamaPelanggan"
+        android:layout_toStartOf="@id/tvNoPelanggan"
+        android:paddingEnd="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 80.000,00"
+        android:textAlignment="textEnd"
+        android:id="@+id/tvNilaiTagihan"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_below="@id/tvNoPelanggan"
+        android:width="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tagihan"
+        android:id="@+id/tvLabelTagihan"
+        android:layout_below="@id/tvLabelNoPelanggan"
+        android:layout_toStartOf="@id/tvNilaiTagihan"
+        android:paddingEnd="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 2.000,00"
+        android:textAlignment="textEnd"
+        android:id="@+id/tvNilaiAdmin"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_below="@id/tvNilaiTagihan"
+        android:width="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Biaya Admin"
+        android:id="@+id/tvLabelAdmin"
+        android:layout_below="@id/tvLabelTagihan"
+        android:layout_toStartOf="@id/tvNilaiAdmin"
+        android:paddingEnd="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 1.000,00"
+        android:textAlignment="textEnd"
+        android:id="@+id/tvNilaiPajak"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_below="@id/tvNilaiAdmin"
+        android:width="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pajak"
+        android:id="@+id/tvLabelPajak"
+        android:layout_below="@id/tvLabelAdmin"
+        android:layout_toStartOf="@id/tvNilaiPajak"
+        android:paddingEnd="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 500,00"
+        android:textAlignment="textEnd"
+        android:id="@+id/tvNilaiDenda"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_below="@id/tvNilaiPajak"
+        android:width="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Denda"
+        android:id="@+id/tvLabelDenda"
+        android:layout_below="@id/tvNilaiPajak"
+        android:layout_toStartOf="@id/tvNilaiDenda"
+        android:paddingEnd="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 1.200,00"
+        android:textAlignment="textEnd"
+        android:id="@+id/tvNilaiLain"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_below="@id/tvNilaiDenda"
+        android:width="180dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lain-lain"
+        android:id="@+id/tvLabelLain"
+        android:layout_below="@id/tvLabelDenda"
+        android:layout_toStartOf="@id/tvNilaiLain"
+        android:paddingEnd="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 100.000,00"
+        android:textAlignment="textEnd"
+        android:id="@+id/tvNilaiTotal"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_below="@id/tvNilaiLain"
+        android:width="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:id="@+id/tvLabelTotal"
+        android:layout_below="@id/tvLabelLain"
+        android:layout_toStartOf="@id/tvNilaiTotal"
+        android:paddingEnd="20dp"/>
+
+
+</RelativeLayout>
