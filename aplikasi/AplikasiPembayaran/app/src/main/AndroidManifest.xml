@@ -8,10 +8,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CekTagihanActivity">
+        <activity android:name=".activity.CekTagihanActivity">
         </activity>
         <activity
-            android:name=".SebelumLoginActivity"
+            android:name=".activity.SebelumLoginActivity"
             android:label="@string/title_activity_sebelum_login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SetelahLoginActivity"
+            android:name=".activity.SetelahLoginActivity"
             android:label="@string/title_activity_setelah_login"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

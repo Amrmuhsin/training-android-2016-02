@@ -1,4 +1,4 @@
-package com.artivisi.app.android.pembayaran;
+package com.artivisi.app.android.pembayaran.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.artivisi.app.android.pembayaran.R;
 import com.artivisi.app.android.pembayaran.fragment.CekTagihanFragment;
 import com.artivisi.app.android.pembayaran.fragment.LoginFragment;
 import com.artivisi.app.android.pembayaran.fragment.RegistrasiFragment;
