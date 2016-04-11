@@ -174,5 +174,25 @@
         android:layout_toStartOf="@id/tvNilaiTotal"
         android:paddingEnd="20dp"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/btnBack"
+        android:layout_below="@+id/tvLabelTotal"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bayar"
+        android:id="@+id/btnBayar"
+        android:layout_below="@+id/tvNilaiTotal"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentEnd="true"/>
+
 
 </RelativeLayout>
