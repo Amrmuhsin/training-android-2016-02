@@ -8,5 +8,27 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Cek Tagihan"
-        android:id="@+id/textView4" />
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_gravity="center_horizontal"
+        android:spinnerMode="dropdown" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNoPelanggan"
+        android:layout_gravity="center_horizontal"
+        android:hint="Nomer Pelanggan" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cek Tagihan"
+        android:id="@+id/btTagihan"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
