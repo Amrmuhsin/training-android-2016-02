@@ -2,6 +2,8 @@ package com.artivisi.app.android.pembayaran.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.artivisi.app.android.pembayaran.R;
+import com.artivisi.app.android.pembayaran.fragment.DashboardFragment;
 
 public class SetelahLoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +33,8 @@ public class SetelahLoginActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        loadFragment(new DashboardFragment());
     }
 
     @Override
@@ -87,5 +92,12 @@ public class SetelahLoginActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadFragment(Fragment fr){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+                .beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_setelah_login, fr);
+        fragmentTransaction.commit();
     }
 }

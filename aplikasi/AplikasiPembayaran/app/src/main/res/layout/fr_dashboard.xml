@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:textAlignment="center"
+    android:transitionGroup="false">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Dashboard"
-        android:id="@+id/textView7" />
-</LinearLayout>
+        android:text="Rp. 100.000,00"
+        android:id="@+id/txtTotalTagihan"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Bayar Semua"
+        android:id="@+id/btnBayarSemua"
+        android:layout_below="@+id/txtTotalTagihan"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:id="@+id/btnRefresh"
+        android:layout_below="@+id/txtTotalTagihan"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvTagihan"
+        android:layout_below="@+id/btnBayarSemua"
+        android:layout_alignParentStart="true"
+        android:padding="10dp" />
+
+</RelativeLayout>
