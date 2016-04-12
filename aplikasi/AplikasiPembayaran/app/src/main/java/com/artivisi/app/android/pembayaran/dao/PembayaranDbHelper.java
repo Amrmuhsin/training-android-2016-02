@@ -17,8 +17,8 @@ public class PembayaranDbHelper extends SQLiteOpenHelper {
             SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_PRODUK + " TEXT, " +
             SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NOMER_PELANGGAN + " TEXT, " +
             SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NAMA_PELANGGAN + " TEXT, " +
-            SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_BULAN_TAGIHAN + " TEXT, " +
-            SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_JATUH_TEMPO + " TEXT, " +
+            SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_BULAN_TAGIHAN + " INTEGER, " +
+            SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_JATUH_TEMPO + " INTEGER, " +
             SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NILAI + " REAL " +
             ")";
 
