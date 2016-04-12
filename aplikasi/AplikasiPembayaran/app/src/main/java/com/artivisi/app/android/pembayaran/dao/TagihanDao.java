@@ -29,14 +29,14 @@ public class TagihanDao {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
-        cv.put(SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_PRODUK, t.getNamaProduk());
-        cv.put(SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NOMER_PELANGGAN, t.getNomerPelanggan());
-        cv.put(SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NAMA_PELANGGAN, t.getNamaPelanggan());
-        cv.put(SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_BULAN_TAGIHAN, t.getBulanTagihan().getTime());
-        cv.put(SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_JATUH_TEMPO, t.getJatuhTempo().getTime());
-        cv.put(SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NILAI, t.getNilai().doubleValue());
+        cv.put(PembayaranDbHelper.TabelTagihan.COLUMN_NAME_PRODUK, t.getNamaProduk());
+        cv.put(PembayaranDbHelper.TabelTagihan.COLUMN_NAME_NOMER_PELANGGAN, t.getNomerPelanggan());
+        cv.put(PembayaranDbHelper.TabelTagihan.COLUMN_NAME_NAMA_PELANGGAN, t.getNamaPelanggan());
+        cv.put(PembayaranDbHelper.TabelTagihan.COLUMN_NAME_BULAN_TAGIHAN, t.getBulanTagihan().getTime());
+        cv.put(PembayaranDbHelper.TabelTagihan.COLUMN_NAME_JATUH_TEMPO, t.getJatuhTempo().getTime());
+        cv.put(PembayaranDbHelper.TabelTagihan.COLUMN_NAME_NILAI, t.getNilai().doubleValue());
 
-        db.insert(SkemaDatabasePembayaran.TabelTagihan.TABLE_NAME, null, cv);
+        db.insert(PembayaranDbHelper.TabelTagihan.TABLE_NAME, null, cv);
     }
 
     public List<Tagihan> semuaTagihan(){
@@ -46,18 +46,18 @@ public class TagihanDao {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String[] daftarKolom = {
-                SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_PRODUK,
-                SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NOMER_PELANGGAN,
-                SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NAMA_PELANGGAN,
-                SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_BULAN_TAGIHAN,
-                SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_JATUH_TEMPO,
-                SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_NILAI
+                PembayaranDbHelper.TabelTagihan.COLUMN_NAME_PRODUK,
+                PembayaranDbHelper.TabelTagihan.COLUMN_NAME_NOMER_PELANGGAN,
+                PembayaranDbHelper.TabelTagihan.COLUMN_NAME_NAMA_PELANGGAN,
+                PembayaranDbHelper.TabelTagihan.COLUMN_NAME_BULAN_TAGIHAN,
+                PembayaranDbHelper.TabelTagihan.COLUMN_NAME_JATUH_TEMPO,
+                PembayaranDbHelper.TabelTagihan.COLUMN_NAME_NILAI
         };
 
-        String urutan = SkemaDatabasePembayaran.TabelTagihan.COLUMN_NAME_JATUH_TEMPO
+        String urutan = PembayaranDbHelper.TabelTagihan.COLUMN_NAME_JATUH_TEMPO
                 + " ASC";
 
-        Cursor c = db.query(SkemaDatabasePembayaran.TabelTagihan.TABLE_NAME,
+        Cursor c = db.query(PembayaranDbHelper.TabelTagihan.TABLE_NAME,
                 daftarKolom, null, null, null, null, urutan);
 
         if(c.moveToFirst()){
