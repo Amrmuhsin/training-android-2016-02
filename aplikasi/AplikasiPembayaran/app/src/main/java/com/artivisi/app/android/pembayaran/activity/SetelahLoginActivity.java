@@ -150,6 +150,7 @@ public class SetelahLoginActivity extends AppCompatActivity
         }
 
         TagihanDao td = new TagihanDao(this);
+        td.kosongkan();
         td.insertTagihan(t1);
         td.insertTagihan(t2);
         td.insertTagihan(t3);

@@ -23,6 +23,12 @@ public class TagihanDao {
         this.context = ctx;
     }
 
+    public void kosongkan(){
+        PembayaranDbHelper dbHelper = new PembayaranDbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(PembayaranDbHelper.TabelTagihan.TABLE_NAME, null, null);
+    }
+
     public void insertTagihan(Tagihan t){
         PembayaranDbHelper dbHelper = new PembayaranDbHelper(context);
 
