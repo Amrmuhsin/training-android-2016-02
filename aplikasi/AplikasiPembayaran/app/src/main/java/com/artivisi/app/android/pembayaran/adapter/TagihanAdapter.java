@@ -48,8 +48,8 @@ public class TagihanAdapter extends ArrayAdapter<Tagihan> {
         txtNomerPelanggan.setText(t.getNomerPelanggan());
         txtNamaPelanggan.setText(t.getNamaPelanggan());
 
-        txtBulanTagihan.setText(new SimpleDateFormat("MMMMM yyyy").format(t.getBulanTagihan()));
-        txtJatuhTempo.setText(new SimpleDateFormat("dd MMMMM yyyy").format(t.getJatuhTempo()));
+        txtBulanTagihan.setText(new SimpleDateFormat("MMM-yyyy").format(t.getBulanTagihan()));
+        txtJatuhTempo.setText(new SimpleDateFormat("dd-MMM-yyyy").format(t.getJatuhTempo()));
 
         NumberFormat currencyFormatter =
                 NumberFormat.getCurrencyInstance(new Locale("id", "id"));
