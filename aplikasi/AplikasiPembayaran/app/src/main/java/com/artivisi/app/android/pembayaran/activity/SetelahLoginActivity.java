@@ -13,7 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.artivisi.app.android.pembayaran.R;
+import com.artivisi.app.android.pembayaran.dao.TagihanDao;
+import com.artivisi.app.android.pembayaran.domain.Tagihan;
 import com.artivisi.app.android.pembayaran.fragment.DashboardFragment;
+
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 public class SetelahLoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +39,7 @@ public class SetelahLoginActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        insertDummyData();
         loadFragment(new DashboardFragment());
     }
 
@@ -99,5 +105,53 @@ public class SetelahLoginActivity extends AppCompatActivity
                 .beginTransaction();
         fragmentTransaction.replace(R.id.fragment_setelah_login, fr);
         fragmentTransaction.commit();
+    }
+
+    private void insertDummyData(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Tagihan t1 = new Tagihan();
+        t1.setNamaProduk("PLN Pascabayar");
+        t1.setNomerPelanggan("1234567890");
+        t1.setNamaPelanggan("Endy Muhardin");
+        t1.setNilai(new BigDecimal("100000.00"));
+
+        try {
+            t1.setBulanTagihan(formatter.parse("2016-01-01"));
+            t1.setJatuhTempo(formatter.parse("2016-01-20"));
+        } catch (Exception err){
+            err.printStackTrace();
+        }
+
+        Tagihan t2 = new Tagihan();
+        t2.setNamaProduk("PLN Pascabayar");
+        t2.setNomerPelanggan("0987654321");
+        t2.setNamaPelanggan("Jimmy Rengga");
+        t2.setNilai(new BigDecimal("90000.00"));
+
+        try {
+            t2.setBulanTagihan(formatter.parse("2016-01-01"));
+            t2.setJatuhTempo(formatter.parse("2016-01-20"));
+        } catch (Exception err){
+            err.printStackTrace();
+        }
+
+        Tagihan t3 = new Tagihan();
+        t3.setNamaProduk("Telkom");
+        t3.setNomerPelanggan("1234567890");
+        t3.setNamaPelanggan("Endy Muhardin");
+        t3.setNilai(new BigDecimal("1000000.00"));
+
+        try {
+            t3.setBulanTagihan(formatter.parse("2016-01-01"));
+            t3.setJatuhTempo(formatter.parse("2016-01-20"));
+        } catch (Exception err){
+            err.printStackTrace();
+        }
+
+        TagihanDao td = new TagihanDao(this);
+        td.insertTagihan(t1);
+        td.insertTagihan(t2);
+        td.insertTagihan(t3);
     }
 }

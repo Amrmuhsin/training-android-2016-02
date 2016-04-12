@@ -24,13 +24,12 @@ import java.util.Locale;
  */
 public class DashboardFragment extends Fragment {
 
-    private TagihanDao tagihanDao = new TagihanDao();
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fr_dashboard, container, false);
 
+        TagihanDao tagihanDao = new TagihanDao(getContext());
         List<Tagihan> dataTagihan = tagihanDao.semuaTagihan();
         BigDecimal total = BigDecimal.ZERO;
         for (Tagihan t: dataTagihan) {
