@@ -1,1 +1,4 @@
 web: java -Dserver.port=$PORT $JAVA_OPTS -jar app.jar
+
+# Deploy command :
+# git push heroku `git subtree split --prefix aplikasi/pembayaran-server master`:master --force
