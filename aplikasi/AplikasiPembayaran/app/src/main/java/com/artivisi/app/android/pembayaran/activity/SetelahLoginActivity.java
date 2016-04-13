@@ -47,9 +47,12 @@ public class SetelahLoginActivity extends AppCompatActivity
         insertDummyData();
         loadFragment(new DashboardFragment());
 
+        String email = getIntent().getStringExtra("email");
+
         // lakukan registrasi ke GCM untuk mendapatkan token
         Log.d(TAG, "Menjalankan service registrasi GCM");
         Intent intent = new Intent(this, RegistrasiGcmService.class);
+        intent.putExtra("email", email);
         startService(intent);
     }
 

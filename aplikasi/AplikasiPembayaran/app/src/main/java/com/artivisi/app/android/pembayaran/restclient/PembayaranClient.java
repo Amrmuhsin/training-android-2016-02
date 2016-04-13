@@ -33,4 +33,12 @@ public class PembayaranClient {
             throw new GagalLoginException("Username / Password salah");
         }
     }
+
+    public void registrasiToken(String email, String token) {
+        Map<String, String> data = new HashMap<>();
+        data.put("email", email);
+        data.put("token", token);
+        String url = "/api/user/token";
+        restTemplate.postForObject(URL_SERVER + url, data, Void.class);
+    }
 }

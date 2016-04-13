@@ -49,6 +49,7 @@ public class LoginFragment extends Fragment {
                 new AsyncTask<String, Void, Boolean>(){
                     ProgressDialog progressDialog;
                     String errorMessage;
+                    String email;
 
                     @Override
                     protected void onPreExecute() {
@@ -61,6 +62,7 @@ public class LoginFragment extends Fragment {
                     protected Boolean doInBackground(String... params) {
                         try {
                             Log.d(TAG, "Login : "+params);
+                            email = params[0];
                             pembayaranClient.login(params[0], params[1]);
                             return true;
                         } catch (GagalLoginException err){
@@ -78,6 +80,7 @@ public class LoginFragment extends Fragment {
                         if(sukses) {
                             Intent setelahLoginActivity
                                     = new Intent(getContext(), SetelahLoginActivity.class);
+                            setelahLoginActivity.putExtra("email", email);
                             startActivity(setelahLoginActivity);
                         } else {
                             Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG)
