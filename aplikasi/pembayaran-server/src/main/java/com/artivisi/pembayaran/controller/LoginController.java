@@ -19,7 +19,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String, Object> login(@RequestBody @Valid LoginRequest login){
-        String validUsername = "endy";
+        String validUsername = "endy@muhardin.com";
         String validPassword = "123";
 
         Map<String, Object> hasil = new HashMap<>();

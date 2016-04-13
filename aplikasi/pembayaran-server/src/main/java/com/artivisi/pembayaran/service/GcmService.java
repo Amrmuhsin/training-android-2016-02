@@ -4,6 +4,7 @@ package com.artivisi.pembayaran.service;
 import com.artivisi.pembayaran.dao.AntrianGcmDao;
 import com.artivisi.pembayaran.entity.AntrianGcm;
 import com.artivisi.pembayaran.entity.StatusAntrian;
+import com.artivisi.pembayaran.exception.PendaftaranGcmTopicGagalException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -19,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -48,6 +51,15 @@ public class GcmService {
                 return execution.execute(request, body);
             }
         }));
+    }
+    
+    public void daftarkanTokenKeTopic(String token, String topic) throws PendaftaranGcmTopicGagalException {
+        String urlRegistrasiTopic = "https://iid.googleapis.com/iid/v1/"+token+"/rel/topics/"+topic;
+        ResponseEntity<Void> hasil = restTemplate.postForEntity(urlRegistrasiTopic, null, Void.class);
+        LOGGER.debug("GCM : Pendaftaran token {} ke topic {} : {}", token, topic, hasil.getStatusCode().toString());
+        if(!HttpStatus.OK.equals(hasil.getStatusCode())){
+            throw new PendaftaranGcmTopicGagalException("Error "+hasil.getStatusCode().toString());
+        }
     }
     
     public void kirimGcmMessage(String tujuan, Map<String, Object> data){
