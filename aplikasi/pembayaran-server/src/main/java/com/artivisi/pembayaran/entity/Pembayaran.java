@@ -4,7 +4,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Pembayaran extends BaseEntity {
     
     @NotNull
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_tagihan", nullable = false)
     private Tagihan tagihan;
     

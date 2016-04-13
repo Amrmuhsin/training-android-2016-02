@@ -73,6 +73,18 @@ CREATE TABLE t_user_gcm_token (
     id_user character varying(255) NOT NULL
 );
 
+CREATE TABLE t_antrian_gcm (
+    id character varying(255) NOT NULL,
+    data character varying(255) NOT NULL,
+    keterangan character varying(255),
+    status character varying(255) NOT NULL,
+    tujuan character varying(255) NOT NULL,
+    waktu_kirim timestamp without time zone,
+    waktu_masuk timestamp without time zone NOT NULL
+);
+
+
+
 
 ALTER TABLE ONLY m_produk
     ADD CONSTRAINT m_produk_pkey PRIMARY KEY (id);
@@ -105,6 +117,8 @@ ALTER TABLE ONLY t_tagihan
 ALTER TABLE ONLY t_user_gcm_token
     ADD CONSTRAINT t_user_gcm_token_pkey PRIMARY KEY (id);
 
+ALTER TABLE ONLY t_antrian_gcm
+    ADD CONSTRAINT t_antrian_gcm_pkey PRIMARY KEY (id);
 
 ALTER TABLE ONLY m_produk
     ADD CONSTRAINT uk_9ev77sfyb2omfjx1ugrdcgftm UNIQUE (kode);
