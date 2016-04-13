@@ -1,9 +1,17 @@
 package com.artivisi.app.android.pembayaran.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+
+import com.artivisi.app.android.pembayaran.dto.Produk;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by endymuhardin on 4/12/16.
@@ -12,6 +20,7 @@ public final class PembayaranDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Pembayaran.db";
     public static final Integer DATABASE_VERSION = 1;
+    SQLiteDatabase db;
 
     // create tabel tagihan
     private static final String SQL_CREATE_TAGIHAN
@@ -25,9 +34,20 @@ public final class PembayaranDbHelper extends SQLiteOpenHelper {
             TabelTagihan.COLUMN_NAME_NILAI + " REAL " +
             ")";
 
+    // create tabel tagihan
+    private static final String SQL_CREATE_PRODUK
+            = "create table "+ DbProduk.TABLE_NAME +" (" +
+            DbProduk.COLUMN_ID_PRODUK + " TEXT primary key, " +
+            DbProduk.COLUMN_NAME_KODE_PRODUK + " TEXT, " +
+            DbProduk.COLUMN_NAME_NAMA_PRODUK + " TEXT, " +
+            ")";
+
     // drop table tagihan
     private static final String SQL_DROP_TAGIHAN
             = "drop table if exists "+TabelTagihan.TABLE_NAME;
+
+    private static final String SQL_DROP_PRODUK
+            = "drop table if exists "+ DbProduk.TABLE_NAME;
 
     public PembayaranDbHelper(Context context) {
         super(context,
@@ -35,14 +55,21 @@ public final class PembayaranDbHelper extends SQLiteOpenHelper {
                 null, DATABASE_VERSION);
     }
 
+    public PembayaranDbHelper open() throws SQLException {
+        db = getWritableDatabase();
+        return this;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TAGIHAN);
+        db.execSQL(SQL_CREATE_PRODUK);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DROP_TAGIHAN);
+        db.execSQL(SQL_DROP_PRODUK);
         onCreate(db);
     }
 
@@ -55,5 +82,46 @@ public final class PembayaranDbHelper extends SQLiteOpenHelper {
         public static final String COLUMN_NAME_BULAN_TAGIHAN = "blth";
         public static final String COLUMN_NAME_JATUH_TEMPO = "jt";
         public static final String COLUMN_NAME_NILAI = "nilai";
+    }
+
+    // Skema tabel tagihan
+    public abstract class DbProduk implements BaseColumns {
+        public static final String TABLE_NAME = "produk";
+        public static final String COLUMN_ID_PRODUK = "id_produk";
+        public static final String COLUMN_NAME_NAMA_PRODUK = "nama_produk";
+        public static final String COLUMN_NAME_KODE_PRODUK = "kode_produk";
+    }
+
+    public long insertProduk(Produk produk) {
+        ContentValues values = new ContentValues();
+        values.put(DbProduk.COLUMN_ID_PRODUK, produk.getId());
+        values.put(DbProduk.COLUMN_NAME_KODE_PRODUK, produk.getKode());
+        values.put(DbProduk.COLUMN_NAME_NAMA_PRODUK, produk.getNama());
+
+        return db.insert(DbProduk.TABLE_NAME, null, values);
+    }
+
+    public List<Produk> getAllProduk() {
+        Cursor c = db.query(DbProduk.TABLE_NAME,
+                new String[]{DbProduk.COLUMN_ID_PRODUK,
+                        DbProduk.COLUMN_NAME_KODE_PRODUK,
+                        DbProduk.COLUMN_NAME_NAMA_PRODUK}, null, null, null, null, null);
+
+        List<Produk> listData = new ArrayList<>();
+
+        if(c.moveToFirst()) {
+            while(c.moveToNext()) {
+                Produk p = new Produk();
+                p.setId(c.getString(c.getColumnIndex(DbProduk.COLUMN_ID_PRODUK)));
+                p.setKode(c.getString(c.getColumnIndex(DbProduk.COLUMN_NAME_KODE_PRODUK)));
+                p.setNama(c.getString(c.getColumnIndex(DbProduk.COLUMN_NAME_NAMA_PRODUK)));
+
+                listData.add(p);
+            }
+
+        }
+        c.close();
+
+        return listData;
     }
 }
