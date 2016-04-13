@@ -1,5 +1,6 @@
 package com.artivisi.app.android.pembayaran.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,12 +18,15 @@ import com.artivisi.app.android.pembayaran.R;
 import com.artivisi.app.android.pembayaran.dao.TagihanDao;
 import com.artivisi.app.android.pembayaran.domain.Tagihan;
 import com.artivisi.app.android.pembayaran.fragment.DashboardFragment;
+import com.artivisi.app.android.pembayaran.service.RegistrasiGcmService;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 public class SetelahLoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "SetelahLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,11 @@ public class SetelahLoginActivity extends AppCompatActivity
 
         insertDummyData();
         loadFragment(new DashboardFragment());
+
+        // lakukan registrasi ke GCM untuk mendapatkan token
+        Log.d(TAG, "Menjalankan service registrasi GCM");
+        Intent intent = new Intent(this, RegistrasiGcmService.class);
+        startService(intent);
     }
 
     @Override
