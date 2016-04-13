@@ -3,7 +3,7 @@ package com.artivisi.pembayaran.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity @Table(name = "m_user_password")
 public class UserPassword extends BaseEntity {
     @NotNull
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
     
