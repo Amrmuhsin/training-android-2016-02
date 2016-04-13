@@ -17,6 +17,10 @@ public class User extends BaseEntity {
     @NotNull @NotEmpty
     @Column(nullable = false)
     private String fullname;
+    
+    @NotNull @NotEmpty
+    @Column(name = "nomer_handphone", nullable = false)
+    private String nomerHandphone;
 
     public String getEmail() {
         return email;
@@ -33,6 +37,13 @@ public class User extends BaseEntity {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
-    
+
+    public String getNomerHandphone() {
+        return nomerHandphone;
+    }
+
+    public void setNomerHandphone(String nomerHandphone) {
+        this.nomerHandphone = nomerHandphone;
+    }
     
 }
