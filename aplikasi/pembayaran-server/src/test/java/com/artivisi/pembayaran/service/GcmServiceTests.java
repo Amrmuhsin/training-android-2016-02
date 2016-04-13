@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(PembayaranServerApplication.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringApplicationConfiguration(PembayaranServerApplication.class)
 public class GcmServiceTests {
     
     @Autowired private GcmService gcm;
     
-    @Test
+    //@Test
     public void testKirimGcm() throws Exception {
         
         Map<String, Object> data = new HashMap<>();

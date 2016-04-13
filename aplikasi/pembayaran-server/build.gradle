@@ -52,7 +52,6 @@ task stage(type: Copy, dependsOn: [clean, build]) {
 	rename {
 		'app.jar'
 	}
-        systemProperty 'spring.profiles.active', 'heroku'
 }
 stage.mustRunAfter(clean)
 
