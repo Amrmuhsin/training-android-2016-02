@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.artivisi.app.android.pembayaran.R;
+import com.artivisi.app.android.pembayaran.dao.PembayaranDbHelper;
 import com.artivisi.app.android.pembayaran.domain.Tagihan;
 
 import java.text.NumberFormat;
