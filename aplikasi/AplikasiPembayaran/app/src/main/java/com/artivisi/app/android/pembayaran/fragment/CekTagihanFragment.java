@@ -56,6 +56,13 @@ public class CekTagihanFragment extends Fragment {
                 );
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(getContext())
+                .unregisterReceiver(broadcastReceiver);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
