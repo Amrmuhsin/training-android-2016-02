@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +28,7 @@ import com.artivisi.app.android.pembayaran.dao.ProdukDao;
 import com.artivisi.app.android.pembayaran.domain.Tagihan;
 import com.artivisi.app.android.pembayaran.dto.Produk;
 import com.artivisi.app.android.pembayaran.exception.ResponseGagalException;
+import com.artivisi.app.android.pembayaran.helper.GpsHelper;
 import com.artivisi.app.android.pembayaran.restclient.PegadaianClient;
 
 import java.util.List;
@@ -87,6 +89,14 @@ public class CekTagihanFragment extends Fragment {
 
                 Log.d(TAG, "Produk : "+produkDipilih.getKode());
                 Log.d(TAG, "Nomer : "+nomerPelanggan);
+
+                Location posisi = new GpsHelper(getActivity()).getLocation();
+                if(posisi != null){
+                    Log.d(TAG, "Lat : "+posisi.getLatitude());
+                    Log.d(TAG, "Lon : "+posisi.getLongitude());
+                } else {
+                    Log.d(TAG, "Posisi tidak bisa didapatkan");
+                }
 
                 new AsyncTask<String, Void, Boolean>(){
                     ProgressDialog progressDialog;
