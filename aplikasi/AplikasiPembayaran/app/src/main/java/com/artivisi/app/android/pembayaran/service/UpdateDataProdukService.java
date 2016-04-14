@@ -2,12 +2,15 @@ package com.artivisi.app.android.pembayaran.service;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.artivisi.app.android.pembayaran.R;
+import com.artivisi.app.android.pembayaran.activity.SebelumLoginActivity;
 import com.artivisi.app.android.pembayaran.dao.ProdukDao;
 import com.artivisi.app.android.pembayaran.dto.Page;
 import com.artivisi.app.android.pembayaran.dto.Produk;
@@ -46,15 +49,24 @@ public class UpdateDataProdukService extends IntentService {
     }
 
     private void tampilkanNotifikasi(){
+        int idNotifikasiProduk = 10;
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_menu_share)
                 .setContentTitle("Produk Baru")
                 .setContentText("Ada produk baru di aplikasi");
+
+        Intent tampilkanSebelumLoginActivity = new Intent(this, SebelumLoginActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(SebelumLoginActivity.class);
+        stackBuilder.addNextIntent(tampilkanSebelumLoginActivity);
+        PendingIntent pi = stackBuilder.getPendingIntent(idNotifikasiProduk, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(pi);
+
         mBuilder.setAutoCancel(true);
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        int idNotifikasiProduk = 10;
         mNotificationManager.notify(idNotifikasiProduk, mBuilder.build());
     }
 }
