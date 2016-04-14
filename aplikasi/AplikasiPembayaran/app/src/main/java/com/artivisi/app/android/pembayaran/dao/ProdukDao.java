@@ -47,15 +47,14 @@ public class ProdukDao {
         List<Produk> listData = new ArrayList<>();
 
         if(c.moveToFirst()) {
-            while(c.moveToNext()) {
+            do {
                 Produk p = new Produk();
                 p.setId(c.getString(c.getColumnIndex(PembayaranDbHelper.DbProduk.COLUMN_ID_PRODUK)));
                 p.setKode(c.getString(c.getColumnIndex(PembayaranDbHelper.DbProduk.COLUMN_NAME_KODE_PRODUK)));
                 p.setNama(c.getString(c.getColumnIndex(PembayaranDbHelper.DbProduk.COLUMN_NAME_NAMA_PRODUK)));
 
                 listData.add(p);
-            }
-
+            } while (c.moveToNext());
         }
         c.close();
         db.close();
