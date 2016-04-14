@@ -1,9 +1,14 @@
 package com.artivisi.app.android.pembayaran.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.artivisi.app.android.pembayaran.PembayaranConstants;
 import com.artivisi.app.android.pembayaran.R;
 import com.artivisi.app.android.pembayaran.adapter.ProdukAdapter;
 import com.artivisi.app.android.pembayaran.dao.ProdukDao;
@@ -27,6 +33,28 @@ public class CekTagihanFragment extends Fragment {
 
     private static final String TAG = "CEKTAGIHAN";
     private Spinner spProduk;
+    private BroadcastReceiver broadcastReceiver;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateSpinner();
+            }
+        };
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(
+                        broadcastReceiver,
+                        new IntentFilter(PembayaranConstants.INTENT_UPDATE_PRODUK)
+                );
+    }
 
     @Nullable
     @Override

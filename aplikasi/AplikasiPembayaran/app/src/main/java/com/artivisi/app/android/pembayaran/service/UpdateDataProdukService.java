@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.artivisi.app.android.pembayaran.PembayaranConstants;
 import com.artivisi.app.android.pembayaran.R;
 import com.artivisi.app.android.pembayaran.activity.SebelumLoginActivity;
 import com.artivisi.app.android.pembayaran.dao.ProdukDao;
@@ -24,9 +26,16 @@ import java.util.List;
 public class UpdateDataProdukService extends IntentService {
 
     private static final String TAG = "PRODUKUPDATE";
+    private LocalBroadcastManager broadcastManager;
 
     public UpdateDataProdukService() {
         super(TAG);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        broadcastManager = LocalBroadcastManager.getInstance(this);
     }
 
     @Override
@@ -46,6 +55,9 @@ public class UpdateDataProdukService extends IntentService {
         for(Produk p : dataProduk){
             pd.insertProduk(p);
         }
+
+        broadcastManager.sendBroadcast(
+                new Intent(PembayaranConstants.INTENT_UPDATE_PRODUK));
     }
 
     private void tampilkanNotifikasi(){
