@@ -1,7 +1,9 @@
 package com.artivisi.app.android.pembayaran.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.artivisi.app.android.pembayaran.PembayaranConstants;
 import com.artivisi.app.android.pembayaran.R;
 import com.artivisi.app.android.pembayaran.activity.SetelahLoginActivity;
 import com.artivisi.app.android.pembayaran.exception.GagalLoginException;
@@ -50,6 +53,8 @@ public class LoginFragment extends Fragment {
                     ProgressDialog progressDialog;
                     String errorMessage;
                     String email;
+                    String cookie;
+                    String username;
 
                     @Override
                     protected void onPreExecute() {
@@ -63,7 +68,8 @@ public class LoginFragment extends Fragment {
                         try {
                             Log.d(TAG, "Login : "+params);
                             email = params[0];
-                            pembayaranClient.login(params[0], params[1]);
+                            cookie = pembayaranClient.login(params[0], params[1]);
+                            username = params[0];
                             return true;
                         } catch (GagalLoginException err){
                             errorMessage = err.getMessage();
@@ -78,6 +84,15 @@ public class LoginFragment extends Fragment {
                         progressDialog.dismiss();
                         Log.d(TAG, "Login sukses : "+sukses);
                         if(sukses) {
+
+                            SharedPreferences sp = getContext()
+                                    .getSharedPreferences(PembayaranConstants.SHARED_PREF_KEY, Context.MODE_PRIVATE);
+
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("cookie", cookie);
+                            editor.putString("username", username);
+                            editor.commit();
+
                             Intent setelahLoginActivity
                                     = new Intent(getContext(), SetelahLoginActivity.class);
                             setelahLoginActivity.putExtra("email", email);

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -112,7 +113,12 @@ public class CekTagihanFragment extends Fragment {
 
                     @Override
                     protected Boolean doInBackground(String... params) {
-                        PegadaianClient client = new PegadaianClient();
+                        SharedPreferences sp = getContext()
+                                .getSharedPreferences(PembayaranConstants.SHARED_PREF_KEY, Context.MODE_PRIVATE);
+                        String cookie = sp.getString("cookie", null);
+                        String username = sp.getString("username", null);
+                        Log.d(TAG, "Cookie : "+cookie);
+                        PegadaianClient client = new PegadaianClient(cookie, username);
                         try {
                             hasil = client.inquiry(params[0], params[1]);
                             return true;

@@ -6,4 +6,7 @@ package com.artivisi.app.android.pembayaran;
 public interface PembayaranConstants {
     public static final String INTENT_UPDATE_PRODUK
             = "com.artivisi.app.android.pembayaran.constants.INTENT_UPDATE_PRODUK";
+    public static final String SHARED_PREF_KEY
+            = "com.artivisi.app.android.pembayaran.constants.PREFERENCE_FILE_KEY";
+
 }

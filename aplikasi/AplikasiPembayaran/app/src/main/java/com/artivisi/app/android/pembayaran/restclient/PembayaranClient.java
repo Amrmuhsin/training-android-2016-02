@@ -1,5 +1,6 @@
 package com.artivisi.app.android.pembayaran.restclient;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.artivisi.app.android.pembayaran.dto.Page;
@@ -29,7 +30,7 @@ public class PembayaranClient {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public void login(String username, String password) throws GagalLoginException {
+    public String login(String username, String password) throws GagalLoginException {
         MultiValueMap<String, String> loginData = new LinkedMultiValueMap<>();
         loginData.add("username", username);
         loginData.add("password", password);
@@ -53,6 +54,8 @@ public class PembayaranClient {
         if(hasil.get("username") == null){
             throw new GagalLoginException("Response invalid");
         }
+
+        return cookiePegadaian;
     }
 
     public void registrasiToken(String email, String token) {

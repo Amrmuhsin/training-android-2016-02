@@ -1,6 +1,8 @@
 package com.artivisi.app.android.pembayaran.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.artivisi.app.android.pembayaran.PembayaranConstants;
 import com.artivisi.app.android.pembayaran.R;
 import com.artivisi.app.android.pembayaran.dao.TagihanDao;
 import com.artivisi.app.android.pembayaran.domain.Tagihan;
@@ -53,7 +56,9 @@ public class SetelahLoginActivity extends AppCompatActivity
         Log.d(TAG, "Menjalankan service registrasi GCM");
         Intent intent = new Intent(this, RegistrasiGcmService.class);
         intent.putExtra("email", email);
-        startService(intent);
+        //startService(intent);
+
+
     }
 
     @Override
@@ -104,8 +109,15 @@ public class SetelahLoginActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
+            SharedPreferences sp = this
+                    .getSharedPreferences(PembayaranConstants.SHARED_PREF_KEY, Context.MODE_PRIVATE);
 
+            SharedPreferences.Editor editor = sp.edit();
+            editor.clear();
+            editor.commit();
+            Intent setelahLogout = new Intent(this,SebelumLoginActivity.class);
+            startActivity(setelahLogout);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
