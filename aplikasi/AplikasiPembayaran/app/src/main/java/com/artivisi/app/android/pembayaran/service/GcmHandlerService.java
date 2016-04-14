@@ -1,5 +1,6 @@
 package com.artivisi.app.android.pembayaran.service;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -15,5 +16,10 @@ public class GcmHandlerService extends GcmListenerService {
         Log.d(TAG, "From : "+from);
         Log.d(TAG, "Action : "+data.getString("action"));
         Log.d(TAG, "Content : "+data.getString("content"));
+
+        if("/topics/produk".equals(from)) {
+            Intent intent = new Intent(this, UpdateDataProdukService.class);
+            startService(intent);
+        }
     }
 }

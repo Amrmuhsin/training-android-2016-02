@@ -28,7 +28,11 @@ public class ProdukDao {
         values.put(PembayaranDbHelper.DbProduk.COLUMN_NAME_KODE_PRODUK, produk.getKode());
         values.put(PembayaranDbHelper.DbProduk.COLUMN_NAME_NAMA_PRODUK, produk.getNama());
 
-        long hasil = db.insert(PembayaranDbHelper.DbProduk.TABLE_NAME, null, values);
+        db.insertWithOnConflict(PembayaranDbHelper.DbProduk.TABLE_NAME,
+                null,
+                values,
+                SQLiteDatabase.CONFLICT_REPLACE);
+
         db.close();
     }
 

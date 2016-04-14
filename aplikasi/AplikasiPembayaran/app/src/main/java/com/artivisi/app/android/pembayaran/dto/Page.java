@@ -1,6 +1,7 @@
 package com.artivisi.app.android.pembayaran.dto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -15,13 +16,13 @@ public class Page<T> {
     private boolean first;
     private int size;
     private int number;
-    private List<T> content;
+    private List<Map<String, String>> content;
 
-    public List<T> getContent() {
+    public List<Map<String, String>> getContent() {
         return content;
     }
 
-    public void setContent(List<T> content) {
+    public void setContent(List<Map<String, String>> content) {
         this.content = content;
     }
 

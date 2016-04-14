@@ -39,7 +39,7 @@ public final class PembayaranDbHelper extends SQLiteOpenHelper {
             = "create table "+ DbProduk.TABLE_NAME +" (" +
             DbProduk.COLUMN_ID_PRODUK + " TEXT primary key, " +
             DbProduk.COLUMN_NAME_KODE_PRODUK + " TEXT, " +
-            DbProduk.COLUMN_NAME_NAMA_PRODUK + " TEXT, " +
+            DbProduk.COLUMN_NAME_NAMA_PRODUK + " TEXT " +
             ")";
 
     // drop table tagihan
