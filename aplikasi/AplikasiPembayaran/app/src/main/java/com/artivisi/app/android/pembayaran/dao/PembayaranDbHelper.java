@@ -92,36 +92,4 @@ public final class PembayaranDbHelper extends SQLiteOpenHelper {
         public static final String COLUMN_NAME_KODE_PRODUK = "kode_produk";
     }
 
-    public long insertProduk(Produk produk) {
-        ContentValues values = new ContentValues();
-        values.put(DbProduk.COLUMN_ID_PRODUK, produk.getId());
-        values.put(DbProduk.COLUMN_NAME_KODE_PRODUK, produk.getKode());
-        values.put(DbProduk.COLUMN_NAME_NAMA_PRODUK, produk.getNama());
-
-        return db.insert(DbProduk.TABLE_NAME, null, values);
-    }
-
-    public List<Produk> getAllProduk() {
-        Cursor c = db.query(DbProduk.TABLE_NAME,
-                new String[]{DbProduk.COLUMN_ID_PRODUK,
-                        DbProduk.COLUMN_NAME_KODE_PRODUK,
-                        DbProduk.COLUMN_NAME_NAMA_PRODUK}, null, null, null, null, null);
-
-        List<Produk> listData = new ArrayList<>();
-
-        if(c.moveToFirst()) {
-            while(c.moveToNext()) {
-                Produk p = new Produk();
-                p.setId(c.getString(c.getColumnIndex(DbProduk.COLUMN_ID_PRODUK)));
-                p.setKode(c.getString(c.getColumnIndex(DbProduk.COLUMN_NAME_KODE_PRODUK)));
-                p.setNama(c.getString(c.getColumnIndex(DbProduk.COLUMN_NAME_NAMA_PRODUK)));
-
-                listData.add(p);
-            }
-
-        }
-        c.close();
-
-        return listData;
-    }
 }

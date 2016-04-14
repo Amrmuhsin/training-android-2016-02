@@ -43,6 +43,7 @@ public class TagihanDao {
         cv.put(PembayaranDbHelper.TabelTagihan.COLUMN_NAME_NILAI, t.getNilai().doubleValue());
 
         db.insert(PembayaranDbHelper.TabelTagihan.TABLE_NAME, null, cv);
+        db.close();
     }
 
     public List<Tagihan> semuaTagihan(){
@@ -80,7 +81,7 @@ public class TagihanDao {
         }
 
         c.close();
-
+        db.close();
         return dataTagihan;
     }
 }
