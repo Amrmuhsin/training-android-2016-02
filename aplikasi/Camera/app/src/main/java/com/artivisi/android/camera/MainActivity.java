@@ -9,11 +9,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                             + fileName;
 
                     loadToImageView(fullPath, ivGambar);
+
+
                     break;
                 default:
                     break;
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         File dir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DCIM);
 
-        fileName = new Random().nextInt() + "-file.jpg";
+        fileName = "a-file.jpg";
 
         File output = new File (dir, fileName);
         i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(output));
@@ -74,5 +78,32 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
 
         iv.setImageBitmap(bitmap);
+
+        compressImage();
+    }
+
+    private void compressImage() {
+        String file = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM).getAbsolutePath()
+                + File.separator
+                + "compressedImg-" + fileName;
+
+        String filePath = Environment
+                .getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_DCIM)
+                .getAbsolutePath() + File.separator
+                + fileName;
+
+        Log.i("image path : ", filePath);
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out); //100-best quality
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
