@@ -8,13 +8,18 @@ import android.view.View;
 import android.widget.Button;
 
 import com.artivisi.android.maps.dto.GenericHttpResponse;
+import com.artivisi.android.maps.dto.Location;
+import com.artivisi.android.maps.helper.GpsHelper;
 import com.artivisi.android.maps.restservice.LocationService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -22,6 +27,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationService locationService = new LocationService();
     private GoogleMap mMap;
     private Button nearMe, allLocation;
+    android.location.Location posisi;
 
 
     @Override
@@ -34,6 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+
         allLocation = (Button) findViewById(R.id.btnAllLoc);
         nearMe = (Button) findViewById(R.id.btnNearMe);
 
@@ -41,6 +49,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 new GetAllLocation().execute();
+            }
+        });
+
+        nearMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                posisi = new GpsHelper(MapsActivity.this).getLocation();
+
+                String latitude = String.valueOf(posisi.getLatitude());
+                String longitude = String.valueOf(posisi.getLongitude());
+
+                new GetNearMe().execute(latitude, longitude);
             }
         });
     }
@@ -76,6 +97,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(GenericHttpResponse genericHttpResponse) {
             Log.i(TAG, genericHttpResponse.getRc());
+            List<Location> data = genericHttpResponse.getData();
+            mMap.clear();
+
+
+
+            for (Location loc :
+                    data) {
+
+                LatLng newLoc = new LatLng(new Double(loc.getLat()), new Double(loc.getLng()));
+                mMap.addMarker(new MarkerOptions().position(newLoc).title(loc.getName()));
+
+            }
+        }
+    }
+
+    private class GetNearMe extends AsyncTask<String, Void, GenericHttpResponse> {
+
+        @Override
+        protected GenericHttpResponse doInBackground(String... param) {
+            return locationService.getNearMe(param[0], param[1]);
+        }
+
+        @Override
+        protected void onPostExecute(GenericHttpResponse genericHttpResponse) {
+            Log.i(TAG, genericHttpResponse.getRc());
+            Log.i(TAG, genericHttpResponse.getMessage());
+
+            posisi = new GpsHelper(MapsActivity.this).getLocation();
+
+            if(genericHttpResponse.getRc().equals("00")) {
+                List<Location> data = genericHttpResponse.getData();
+                mMap.clear();
+
+                LatLng myLoc = new LatLng(posisi.getLatitude(), posisi.getLatitude());
+                mMap.addMarker(new MarkerOptions()
+                        .position(myLoc)
+                        .title("You're here.")
+                );
+
+                //create marker for myself
+                Log.i(TAG, "" + posisi.getLatitude() + " " + posisi.getLongitude());
+                for (Location loc : data) {
+
+                    LatLng newLoc = new LatLng(new Double(loc.getLat()), new Double(loc.getLng()));
+                    mMap.addMarker(new MarkerOptions()
+                            .position(newLoc)
+                            .title(loc.getName())
+                            .icon(BitmapDescriptorFactory
+                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+                }
+
+
+            }
+
+
         }
     }
 }
