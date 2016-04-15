@@ -62,6 +62,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String longitude = String.valueOf(posisi.getLongitude());
 
                 new GetNearMe().execute(latitude, longitude);
+
+
             }
         });
     }
@@ -126,17 +128,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             posisi = new GpsHelper(MapsActivity.this).getLocation();
 
+
+
             if(genericHttpResponse.getRc().equals("00")) {
                 List<Location> data = genericHttpResponse.getData();
                 mMap.clear();
 
-                LatLng myLoc = new LatLng(posisi.getLatitude(), posisi.getLatitude());
+                //create marker for myself
+
+                LatLng myLoc = new LatLng(posisi.getLatitude(), posisi.getLongitude());
                 mMap.addMarker(new MarkerOptions()
                         .position(myLoc)
                         .title("You're here.")
                 );
 
-                //create marker for myself
                 Log.i(TAG, "" + posisi.getLatitude() + " " + posisi.getLongitude());
                 for (Location loc : data) {
 
