@@ -1,8 +1,14 @@
 package com.artivisi.android.maps;
 
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
+import com.artivisi.android.maps.dto.GenericHttpResponse;
+import com.artivisi.android.maps.restservice.LocationService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -12,16 +18,31 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final String TAG = MapsActivity.class.getSimpleName();
+    private LocationService locationService = new LocationService();
     private GoogleMap mMap;
+    private Button nearMe, allLocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        allLocation = (Button) findViewById(R.id.btnAllLoc);
+        nearMe = (Button) findViewById(R.id.btnNearMe);
+
+        allLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new GetAllLocation().execute();
+            }
+        });
     }
 
 
@@ -43,5 +64,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in SOLO"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 10000, null);
+    }
+
+    private class GetAllLocation extends AsyncTask<Void, Void, GenericHttpResponse> {
+
+        @Override
+        protected GenericHttpResponse doInBackground(Void... voids) {
+            return locationService.ambilAllLocation();
+        }
+
+        @Override
+        protected void onPostExecute(GenericHttpResponse genericHttpResponse) {
+            Log.i(TAG, genericHttpResponse.getRc());
+        }
     }
 }
