@@ -1,5 +1,7 @@
 package com.artivisi.android.maps.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by jimmy on 15/04/16.
  */
@@ -7,7 +9,8 @@ public class Location {
 
     private String address;
     private String name;
-    private String lat;
+    @SerializedName("lat")
+    private String latitude;
     private String lng;
     private String distance;
 
@@ -27,12 +30,12 @@ public class Location {
         this.name = name;
     }
 
-    public String getLat() {
-        return lat;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setLat(String lat) {
-        this.lat = lat;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
     public String getLng() {

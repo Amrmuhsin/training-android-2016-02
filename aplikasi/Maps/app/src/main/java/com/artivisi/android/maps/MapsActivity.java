@@ -107,7 +107,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for (Location loc :
                     data) {
 
-                LatLng newLoc = new LatLng(new Double(loc.getLat()), new Double(loc.getLng()));
+                LatLng newLoc = new LatLng(new Double(loc.getLatitude()), new Double(loc.getLng()));
                 mMap.addMarker(new MarkerOptions().position(newLoc).title(loc.getName()));
 
             }
@@ -145,7 +145,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.i(TAG, "" + posisi.getLatitude() + " " + posisi.getLongitude());
                 for (Location loc : data) {
 
-                    LatLng newLoc = new LatLng(new Double(loc.getLat()), new Double(loc.getLng()));
+                    LatLng newLoc = new LatLng(new Double(loc.getLatitude()), new Double(loc.getLng()));
                     mMap.addMarker(new MarkerOptions()
                             .position(newLoc)
                             .title(loc.getName())
